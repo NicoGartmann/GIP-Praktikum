@@ -1,0 +1,25 @@
+CXX = cl 
+CXXFLAGS = /EHsc /nologo 
+
+
+MAIN_EXECUTABLE = main.exe
+all: $(MAIN_EXECUTABLE) 
+.PHONY: all
+
+$(MAIN_EXECUTABLE): main.obj sort.obj
+	$(CXX) $(CXXFLAGS) $^	
+
+
+clean:
+	del *.obj
+.PHONY: clean
+
+%.obj: %.cpp %.h
+	$(CXX) $(CXXFLAGS) /c $<
+%.obj: %.cpp 
+	$(CXX) $(CXXFLAGS) /c $<
+
+
+distclean: clean
+	del  $(MAIN_EXECUTABLE)
+.PHONY: distclean
